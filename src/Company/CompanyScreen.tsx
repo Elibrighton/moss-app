@@ -13,9 +13,13 @@ interface ICompanyProps {
 @observer
 export default class CompanyScreen extends React.Component<ICompanyProps> {
     componentDidMount() {
-        this.props.store!.getCompanyList();
+        const { store } = this.props;
+        store!.getCompanyList();
     }
-
+    componentWillUnmount() {
+        const { store } = this.props;
+        store!.resetCompanyList()
+    }
     render() {
         const columns = [
             {
@@ -24,6 +28,7 @@ export default class CompanyScreen extends React.Component<ICompanyProps> {
                 key: "Id",
             }
         ];
+        const { store } = this.props;
 
         return (
             <>
@@ -34,7 +39,7 @@ export default class CompanyScreen extends React.Component<ICompanyProps> {
                     <Link to="/companies/add">
                         <Button type="primary" icon={<PlusOutlined />}>Add</Button>
                     </Link>
-                    <Table columns={columns} loading={this.props.store!.companyListPromiseIsPending} dataSource={this.props.store!.companyList} />
+                    <Table columns={columns} loading={store!.companyListState === "pending"} dataSource={this.props.store!.companyList} />
                 </div>
             </>
         )

@@ -1,5 +1,5 @@
 import axios from 'axios';
-import updateFromDto, { CompanyDto, Company } from './Models/CompanyModel';
+import updateFromDto, { CompanyDto, Company, toDto } from './Models/CompanyModel';
 
 export class CompanyGateway {
     async GetCompanyList(): Promise<Company[]> {
@@ -10,6 +10,12 @@ export class CompanyGateway {
                 companyList = companyDtoList.map((companyDto) => updateFromDto(companyDto));
             })
         return companyList;
+    }
+
+    async AddCompany(company: Company): Promise<void> {
+        const companyDto: CompanyDto = toDto(company);
+
+        return axios.post("/api/companies", companyDto)
     }
 }
 
