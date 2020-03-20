@@ -1,5 +1,5 @@
 export type Company = {
-    key: string,
+    key: string;
     Id: string;
     CompanyName: string;
 }

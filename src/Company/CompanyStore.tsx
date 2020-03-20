@@ -7,6 +7,7 @@ export class CompanyStore {
     @observable companyList: Company[] = [];
     @observable companyListState: string = "pending";
     @observable addCompanyState: string = "pending";
+    @observable editCompanyState: string = "pending";
 
     @action
     getCompanyList() {
@@ -26,6 +27,14 @@ export class CompanyStore {
     }
 
     @action
+    editCompany(company: Company) {
+        gateway.EditCompany(company)
+            .then(() => {
+                this.editCompanyState = "done";
+            })
+    }
+
+    @action
     resetCompanyList() {
         this.companyListState = "pending";
     }
@@ -33,6 +42,11 @@ export class CompanyStore {
     @action
     resetAddCompany() {
         this.addCompanyState = "pending";
+    }
+
+    @action
+    resetEditCompany() {
+        this.editCompanyState = "pending";
     }
 }
 

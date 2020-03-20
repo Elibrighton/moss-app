@@ -12,10 +12,16 @@ export class CompanyGateway {
         return companyList;
     }
 
-    async AddCompany(company: Company): Promise<void> {
+    async AddCompany(company: Company): Promise<Company> {
         const companyDto: CompanyDto = toDto(company);
 
         return axios.post("/api/companies", companyDto)
+    }
+
+    async EditCompany(company: Company): Promise<Company> {
+        const companyDto: CompanyDto = toDto(company);
+
+        return axios.put("/api/companies/" + companyDto.Id, companyDto)
     }
 }
 

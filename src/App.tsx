@@ -6,6 +6,7 @@ import { Switch, Route, Link } from "react-router-dom";
 import 'antd/dist/antd.css';
 import CompanyScreen from './Company/CompanyScreen';
 import AddCompanyForm from "./Company/AddCompanyForm";
+import EditCompanyForm from './Company/EditCompanyForm';
 
 const { Header, Footer, Content } = Layout;
 const year: number = new Date().getFullYear();
@@ -30,6 +31,7 @@ function App() {
           <Route exact path="/" component={Home} />
           <Route path="/companies" exact component={CompanyScreen} />
           <Route path="/companies/add" component={AddCompanyForm} />
+          <Route path="/companies/edit/:id" component={EditCompanyForm} />
         </Switch>
       </Content>
       <Footer style={{ textAlign: 'center' }}>Moss ©{year} Created by JET Brighton PTY LTD</Footer>

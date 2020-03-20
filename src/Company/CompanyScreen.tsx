@@ -26,6 +26,7 @@ export default class CompanyScreen extends React.Component<ICompanyProps> {
                 title: "Company Name",
                 dataIndex: "CompanyName",
                 key: "Id",
+                render: (text: React.ReactNode, record: { Id: string; CompanyName: string; }) => <Link to={"/companies/edit/" + record.Id + "?CompanyName=" + record.CompanyName} >{text}</Link>,
             }
         ];
         const { store } = this.props;
