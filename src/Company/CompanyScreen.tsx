@@ -1,7 +1,7 @@
 import React from "react";
 import { Breadcrumb, Table, Button, Popconfirm, message } from "antd";
 import { Link } from "react-router-dom";
-import { PlusOutlined } from '@ant-design/icons';
+import { PlusOutlined, EditOutlined, DeleteOutlined } from '@ant-design/icons';
 import { CompanyStore } from './CompanyStore'
 import { observer, inject } from 'mobx-react';
 
@@ -40,17 +40,20 @@ export default class CompanyScreen extends React.Component<ICompanyProps> {
             {
                 title: 'Action',
                 key: 'action',
-                render: (record: { Id: string; }) => (
-                    <Popconfirm
-                        title="Are you sure you want to delete this company?"
-                        onConfirm={() => {
-                            this.handleConfirm(record.Id);
-                        }}
-                        okText="Yes"
-                        cancelText="No"
-                    >
-                        <a href={"/companies/delete/" + record.Id}>Delete</a>
-                    </Popconfirm>
+                render: (record: { Id: string; CompanyName: string; }) => (
+                    <>
+                        <Link to={"/companies/edit/" + record.Id + "?CompanyName=" + record.CompanyName}><EditOutlined /></Link>
+                        <Popconfirm
+                            title="Are you sure you want to delete this company?"
+                            onConfirm={() => {
+                                this.handleConfirm(record.Id);
+                            }}
+                            okText="Yes"
+                            cancelText="No"
+                        >
+                            <a href={"/companies/delete/" + record.Id}><DeleteOutlined /></a>
+                        </Popconfirm>
+                    </>
                 ),
             }
         ];
