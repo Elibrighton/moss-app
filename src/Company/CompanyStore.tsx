@@ -8,6 +8,7 @@ export class CompanyStore {
     @observable companyListState: string = "pending";
     @observable addCompanyState: string = "pending";
     @observable editCompanyState: string = "pending";
+    @observable deleteCompanyState: string = "pending";
 
     @action
     getCompanyList() {
@@ -35,18 +36,36 @@ export class CompanyStore {
     }
 
     @action
+    deleteCompany(id: string) {
+        gateway.DeleteCompany(id)
+            .then(() => {
+                this.deleteCompanyState = "done";
+                this.getCompanyList();
+            })
+    }
+
+    @action
     resetCompanyList() {
-        this.companyListState = "pending";
+        if (this.companyListState !== "pending") {
+            this.companyListState = "pending";
+        }
+        if (this.deleteCompanyState !== "pending") {
+            this.deleteCompanyState = "pending";
+        }
     }
 
     @action
     resetAddCompany() {
-        this.addCompanyState = "pending";
+        if (this.addCompanyState !== "pending") {
+            this.addCompanyState = "pending";
+        }
     }
 
     @action
     resetEditCompany() {
-        this.editCompanyState = "pending";
+        if (this.editCompanyState !== "pending") {
+            this.editCompanyState = "pending";
+        }
     }
 }
 

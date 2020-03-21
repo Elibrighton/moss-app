@@ -23,6 +23,10 @@ export class CompanyGateway {
 
         return axios.put("/api/companies/" + companyDto.Id, companyDto)
     }
+
+    async DeleteCompany(id: string): Promise<void> {
+        return axios.delete("/api/companies/" + id)
+    }
 }
 
 export const gateway = new CompanyGateway();
