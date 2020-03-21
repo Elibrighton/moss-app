@@ -31,7 +31,7 @@ function App() {
           <Route exact path="/" component={Home} />
           <Route path="/companies" exact component={CompanyScreen} />
           <Route path="/companies/add" component={AddCompanyForm} />
-          <Route path="/companies/edit/:id" component={EditCompanyForm} />
+          <Route path="/companies/edit/:key" component={EditCompanyForm} />
         </Switch>
       </Content>
       <Footer style={{ textAlign: 'center' }}>Moss ©{year} Created by JET Brighton PTY LTD</Footer>

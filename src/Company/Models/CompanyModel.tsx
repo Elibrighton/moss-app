@@ -1,6 +1,5 @@
 export type Company = {
-    key: string;
-    Id: string;
+    Key: string;
     CompanyName: string;
 }
 
@@ -11,8 +10,7 @@ export type CompanyDto = {
 
 export default function updateFromDto(companyDto: CompanyDto): Company {
     const company: Company = {
-        key: companyDto.Id,
-        Id: companyDto.Id,
+        Key: companyDto.Id,
         CompanyName: companyDto.Name,
     };
 
@@ -21,7 +19,7 @@ export default function updateFromDto(companyDto: CompanyDto): Company {
 
 export function toDto(company: Company): CompanyDto {
     const companyDto: CompanyDto = {
-        Id: company.Id,
+        Id: company.Key,
         Name: company.CompanyName
     };
 

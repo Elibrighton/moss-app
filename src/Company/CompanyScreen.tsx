@@ -20,9 +20,9 @@ export default class CompanyScreen extends React.Component<ICompanyProps> {
         const { store } = this.props;
         store!.resetCompanyList();
     }
-    handleConfirm(id: string) {
+    handleConfirm(key: string) {
         const { store } = this.props;
-        store!.deleteCompany(id);
+        store!.deleteCompany(key);
     }
     render() {
         const { store } = this.props;
@@ -34,24 +34,24 @@ export default class CompanyScreen extends React.Component<ICompanyProps> {
             {
                 title: "Company name",
                 dataIndex: "CompanyName",
-                key: "Id",
-                render: (text: React.ReactNode, record: { Id: string; CompanyName: string; }) => <Link to={"/companies/edit/" + record.Id + "?CompanyName=" + record.CompanyName} >{text}</Link>,
+                key: "Key",
+                render: (text: React.ReactNode, record: { Key: string; CompanyName: string; }) => <Link to={"/companies/edit/" + record.Key + "?CompanyName=" + record.CompanyName} >{text}</Link>,
             },
             {
                 title: 'Action',
                 key: 'action',
-                render: (record: { Id: string; CompanyName: string; }) => (
+                render: (record: { Key: string; CompanyName: string; }) => (
                     <>
-                        <Link to={"/companies/edit/" + record.Id + "?CompanyName=" + record.CompanyName}><EditOutlined /></Link>
+                        <Link to={"/companies/edit/" + record.Key + "?CompanyName=" + record.CompanyName}><EditOutlined /></Link>
                         <Popconfirm
                             title="Are you sure you want to delete this company?"
                             onConfirm={() => {
-                                this.handleConfirm(record.Id);
+                                this.handleConfirm(record.Key);
                             }}
                             okText="Yes"
                             cancelText="No"
                         >
-                            <a href={"/companies/delete/" + record.Id}><DeleteOutlined /></a>
+                            <a href={"/companies/delete/" + record.Key}><DeleteOutlined /></a>
                         </Popconfirm>
                     </>
                 ),

@@ -8,7 +8,7 @@ import { Redirect, RouteComponentProps } from "react-router-dom";
 import * as querystring from "query-string";
 
 interface RouteParams {
-    id: string
+    key: string
 }
 
 interface IEditCompanyFormProps extends RouteComponentProps<RouteParams> {
@@ -25,7 +25,7 @@ export default class EditCompanyForm extends React.Component<IEditCompanyFormPro
     render() {
         const { store, location, match } = this.props;
         const { editCompanyState } = store!;
-        const { id } = match.params;
+        const { key } = match.params;
         const qsValues = querystring.parse(location.search);
         const companyName = qsValues.CompanyName as string || "";
         const onSubmit = async (values: EditCompanyFormValues) => {
@@ -38,7 +38,7 @@ export default class EditCompanyForm extends React.Component<IEditCompanyFormPro
         return (
             <Form
                 onSubmit={onSubmit}
-                initialValues={{ companyName: companyName, id: id }}
+                initialValues={{ companyName: companyName, key: key }}
                 render={({ handleSubmit }) => (
                     <form onSubmit={handleSubmit}>
                         <h2>Edit company</h2>

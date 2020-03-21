@@ -36,8 +36,8 @@ export class CompanyStore {
     }
 
     @action
-    deleteCompany(id: string) {
-        gateway.DeleteCompany(id)
+    deleteCompany(key: string) {
+        gateway.DeleteCompany(key)
             .then(() => {
                 this.deleteCompanyState = "done";
                 this.getCompanyList();
