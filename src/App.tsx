@@ -31,8 +31,8 @@ function App() {
         <Switch>
           <Route exact path="/" component={Home} />
           <Route path="/companies" exact component={CompanyScreen} />
-          <Route path="/companies/:key" component={CompanyDetails} />
           <Route path="/companies/add" component={AddCompanyForm} />
+          <Route path="/companies/:key" exact component={CompanyDetails} />
           <Route path="/companies/edit/:key" component={EditCompanyForm} />
         </Switch>
       </Content>
