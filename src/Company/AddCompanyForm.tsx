@@ -37,6 +37,14 @@ export default class AddCompanyForm extends React.Component<IAddCompanyFormProps
                             <label>Company Name</label>
                             <Field name="companyName" component="input" required />
                         </div>
+                        <div>
+                            <label>Code</label>
+                            <Field
+                                name="code"
+                                component="input"
+                                type="text"
+                            />
+                        </div>
                         <button type="submit">Save</button>
                     </form>
                 )}

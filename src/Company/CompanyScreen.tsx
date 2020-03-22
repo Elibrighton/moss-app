@@ -26,7 +26,8 @@ export default class CompanyScreen extends React.Component<ICompanyProps> {
     }
     render() {
         const { store } = this.props;
-        if (store!.deleteCompanyState === "done") {
+        const { companyList, companyListState, deleteCompanyState } = store!;
+        if (deleteCompanyState === "done") {
             message.success("Company deleted");
             store!.resetCompanyList();
         }
@@ -34,24 +35,29 @@ export default class CompanyScreen extends React.Component<ICompanyProps> {
             {
                 title: "Company name",
                 dataIndex: "CompanyName",
-                key: "Key",
-                render: (text: React.ReactNode, record: { Key: string; CompanyName: string; }) => <Link to={"/companies/edit/" + record.Key + "?CompanyName=" + record.CompanyName} >{text}</Link>,
+                key: "key",
+                render: (text: React.ReactNode, record: { key: string; CompanyName: string; Code: string }) => <Link to={"/companies/edit/" + record.key + "?CompanyName=" + record.CompanyName + "&Code=" + record.Code} >{text}</Link>,
+            },
+            {
+                title: "Code",
+                dataIndex: "Code",
+                key: "Code"
             },
             {
                 title: 'Action',
                 key: 'action',
-                render: (record: { Key: string; CompanyName: string; }) => (
+                render: (record: { key: string; CompanyName: string; Code: string }) => (
                     <>
-                        <Link to={"/companies/edit/" + record.Key + "?CompanyName=" + record.CompanyName}><EditOutlined /></Link>
+                        <Link to={"/companies/edit/" + record.key + "?CompanyName=" + record.CompanyName + "&Code=" + record.Code}><EditOutlined /></Link>
                         <Popconfirm
                             title="Are you sure you want to delete this company?"
                             onConfirm={() => {
-                                this.handleConfirm(record.Key);
+                                this.handleConfirm(record.key);
                             }}
                             okText="Yes"
                             cancelText="No"
                         >
-                            <a href={"/companies/delete/" + record.Key}><DeleteOutlined /></a>
+                            <a href={"/companies/delete/" + record.key}><DeleteOutlined /></a>
                         </Popconfirm>
                     </>
                 ),
@@ -66,7 +72,7 @@ export default class CompanyScreen extends React.Component<ICompanyProps> {
                     <Link to="/companies/add">
                         <Button type="primary" icon={<PlusOutlined />}>Add</Button>
                     </Link>
-                    <Table columns={columns} loading={store!.companyListState === "pending"} dataSource={store!.companyList} />
+                    <Table columns={columns} loading={companyListState === "pending"} dataSource={companyList} />
                 </div>
             </>
         )

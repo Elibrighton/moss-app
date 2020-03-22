@@ -12,13 +12,13 @@ export class CompanyGateway {
         return companyList;
     }
 
-    async AddCompany(company: Company): Promise<Company> {
+    async AddCompany(company: Company): Promise<void> {
         const companyDto: CompanyDto = toDto(company);
 
         return axios.post("/api/companies", companyDto)
     }
 
-    async EditCompany(company: Company): Promise<Company> {
+    async EditCompany(company: Company): Promise<void> {
         const companyDto: CompanyDto = toDto(company);
 
         return axios.put("/api/companies/" + companyDto.Id, companyDto)

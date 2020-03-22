@@ -28,6 +28,7 @@ export default class EditCompanyForm extends React.Component<IEditCompanyFormPro
         const { key } = match.params;
         const qsValues = querystring.parse(location.search);
         const companyName = qsValues.CompanyName as string || "";
+        const code = qsValues.Code as string || "" as string;
         const onSubmit = async (values: EditCompanyFormValues) => {
             const company: Company = toCompany(values);
             store!.editCompany(company);
@@ -38,7 +39,7 @@ export default class EditCompanyForm extends React.Component<IEditCompanyFormPro
         return (
             <Form
                 onSubmit={onSubmit}
-                initialValues={{ companyName: companyName, key: key }}
+                initialValues={{ code: code, companyName: companyName, key: key }}
                 render={({ handleSubmit }) => (
                     <form onSubmit={handleSubmit}>
                         <h2>Edit company</h2>
@@ -48,6 +49,14 @@ export default class EditCompanyForm extends React.Component<IEditCompanyFormPro
                                 name="companyName"
                                 component="input"
                                 required
+                            />
+                        </div>
+                        <div>
+                            <label>Code</label>
+                            <Field
+                                name="code"
+                                component="input"
+                                type="text"
                             />
                         </div>
                         <button type="submit">Save</button>
