@@ -4,8 +4,9 @@ import { inject, observer } from "mobx-react";
 import { CompanyStore } from './CompanyStore'
 import { Company } from "./Models/CompanyModel";
 import toCompany, { EditCompanyFormValues } from "./EditCompanyFormValues";
-import { Redirect, RouteComponentProps } from "react-router-dom";
+import { Redirect, RouteComponentProps, Link } from "react-router-dom";
 import * as querystring from "query-string";
+import { Breadcrumb } from "antd";
 
 interface RouteParams {
     key: string
@@ -37,32 +38,42 @@ export default class EditCompanyForm extends React.Component<IEditCompanyFormPro
             return (<Redirect to="/companies" />);
         }
         return (
-            <Form
-                onSubmit={onSubmit}
-                initialValues={{ code: code, companyName: companyName, key: key }}
-                render={({ handleSubmit }) => (
-                    <form onSubmit={handleSubmit}>
-                        <h2>Edit company</h2>
-                        <div>
-                            <label>Company Name</label>
-                            <Field
-                                name="companyName"
-                                component="input"
-                                required
-                            />
-                        </div>
-                        <div>
-                            <label>Code</label>
-                            <Field
-                                name="code"
-                                component="input"
-                                type="text"
-                            />
-                        </div>
-                        <button type="submit">Save</button>
-                    </form>
-                )}
-            />
+            <>
+                <Breadcrumb style={{ margin: "16px 0" }}>
+                    <Link to="/companies">
+                        <Breadcrumb.Item>Companies</Breadcrumb.Item>
+                    </Link>
+                    <Breadcrumb.Item>Edit</Breadcrumb.Item>
+                </Breadcrumb>
+                <div style={{ background: "#fff", padding: 24, minHeight: 280 }}>
+                    <Form
+                        onSubmit={onSubmit}
+                        initialValues={{ code: code, companyName: companyName, key: key }}
+                        render={({ handleSubmit }) => (
+                            <form onSubmit={handleSubmit}>
+                                <h2>Edit company</h2>
+                                <div>
+                                    <label>Company Name</label>
+                                    <Field
+                                        name="companyName"
+                                        component="input"
+                                        required
+                                    />
+                                </div>
+                                <div>
+                                    <label>Code</label>
+                                    <Field
+                                        name="code"
+                                        component="input"
+                                        type="text"
+                                    />
+                                </div>
+                                <button type="submit">Save</button>
+                            </form>
+                        )}
+                    />
+                </div>
+            </>
         )
     }
 }

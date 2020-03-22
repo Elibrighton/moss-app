@@ -2,7 +2,7 @@ import React from "react";
 import { Breadcrumb, Spin } from "antd";
 import { CompanyStore } from './CompanyStore'
 import { observer, inject } from 'mobx-react';
-import { RouteComponentProps } from "react-router-dom";
+import { RouteComponentProps, Link } from "react-router-dom";
 import './CompanyDetails.css';
 
 interface RouteParams {
@@ -31,7 +31,10 @@ export default class CompanyDetails extends React.Component<ICompanyDetailsProps
         return (
             <>
                 <Breadcrumb style={{ margin: "16px 0" }}>
-                    <Breadcrumb.Item>Companies</Breadcrumb.Item>
+                    <Link to="/companies">
+                        <Breadcrumb.Item>Companies</Breadcrumb.Item>
+                    </Link>
+                    <Breadcrumb.Item>Details</Breadcrumb.Item>
                 </Breadcrumb>
                 <div style={{ background: "#fff", padding: 24, minHeight: 280 }}>
                     {getCompanyState !== "done" ?
