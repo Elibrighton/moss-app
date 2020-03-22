@@ -7,6 +7,7 @@ import 'antd/dist/antd.css';
 import CompanyScreen from './Company/CompanyScreen';
 import AddCompanyForm from "./Company/AddCompanyForm";
 import EditCompanyForm from './Company/EditCompanyForm';
+import CompanyDetails from './Company/CompanyDetails';
 
 const { Header, Footer, Content } = Layout;
 const year: number = new Date().getFullYear();
@@ -30,6 +31,7 @@ function App() {
         <Switch>
           <Route exact path="/" component={Home} />
           <Route path="/companies" exact component={CompanyScreen} />
+          <Route path="/companies/:key" component={CompanyDetails} />
           <Route path="/companies/add" component={AddCompanyForm} />
           <Route path="/companies/edit/:key" component={EditCompanyForm} />
         </Switch>

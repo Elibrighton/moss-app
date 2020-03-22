@@ -12,6 +12,16 @@ export class CompanyGateway {
         return companyList;
     }
 
+    async GetCompany(id: string): Promise<Company> {
+        let company: Company = { key: "", CompanyName: "", Code: "" };
+        await axios.get("/api/companies/" + id)
+            .then(res => {
+                const companyDto: CompanyDto = res.data;
+                company = updateFromDto(companyDto);
+            })
+        return company;
+    }
+
     async AddCompany(company: Company): Promise<void> {
         const companyDto: CompanyDto = toDto(company);
 
